@@ -1,6 +1,9 @@
 import requests, re
 
-page = requests.get("https://insideairbnb.com/get-the-data").text
+r = requests.get("https://insideairbnb.com/get-the-data")
+r.encoding = "utf-8"
+page = r.text
+
 links = sorted(set(re.findall(r"https://data\.insideairbnb\.com/\S+?/visualisations/listings\.csv", page)))
 
 print(len(links))
