@@ -1,21 +1,21 @@
 # Short-term Airbnb rental ROI across World Cities
 
-**If you bought a 1–2 bedroom apartment and rented it short-term on Airbnb, which cities would give the best return?**
+If you bought a 1–2 bedroom apartment and rented it short-term on Airbnb, which cities would give the best return?
 
 ---
 
 ## Contents
 
-1. [Executive summary](#executive-summary)
-2. [Findings](#findings)
-3. [Method](#method)
-4. [City selection](#city-selection)
-5. [Cleaning](#cleaning)
-6. [Estimating occupancy](#estimating-occupancy)
-7. [Assumptions](#assumptions)
-8. [Limitations](#limitations)
-9. [Extensions](#extensions)
-10. [Reproducing this](#reproducing-this)
+1. **[Executive summary](#executive-summary)**
+2. **[Findings](#findings)**
+3. **[Method](#method)**
+4. **[City selection](#city-selection)**
+5. **[Cleaning](#cleaning)**
+6. **[Estimating occupancy](#estimating-occupancy)**
+7. **[Assumptions](#assumptions)**
+8. **[Limitations](#limitations)**
+9. **[Extensions](#extensions)**
+10. **[Reproducing this](#reproducing-this)**
 
 ---
 
@@ -123,7 +123,7 @@ Using Numbeo's utilities figure as a rough proxy for local cost level:
 | Property price ↔ utilities | 0.39 | 0.44 |
 | Revenue ↔ property price | 0.07 | 0.36 |
 
-Both columns are shown because the choice of scale matters here. Three of the pairs shift modestly between them. The fourth swings from near-zero to moderate, because revenue and property price are the two most skewed variables in the set and a handful of very expensive cities drags the raw fit toward zero.
+Both columns are shown because the choice of scale matters here. Three of the pairs shift modestly between them. The fourth swings from near-zero to moderate, because revenue and property price are the two most skewed variables in the set and a few extreme cities distort the raw measurement. Most cities have property between $1,400 and $10,000/m²; Hong Kong sits at $28,217. On the raw scale that one city carries as much weight as a large part of the rest of the sample. Taking logs brings it back into range, so the measurement reflects all 80 cities rather than a handful of outliers.
 
 Four moderate correlations between four different measures of "how expensive is this city." They point at one underlying factor: costly cities are costly at everything — property, nightly rates and utilities together.
 
@@ -145,7 +145,7 @@ Correlation with ROI across all 80 cities:
 | Property price per m² | −0.36 | −0.29 |
 | Revenue ÷ property price | +0.996 | — |
 
-Every correlation is weaker against the outside-centre figure but keeps the same ordering, so nothing here depends on which measure is used. The last row is a sanity check rather than a finding: that ratio *is* the equation minus the two small cost terms, so it should correlate near-perfectly. It does.
+Every correlation is weaker against the outside-centre figure but keeps the same ordering, so nothing here depends on which measure is used. The last row is a sanity check rather than a finding: that ratio is the equation minus the two small cost terms, so it should correlate near-perfectly. It does.
 
 Revenue is nightly price times nights booked, so it seems odd that one of its components beats it. The reason is how each component relates to property price — the number ROI divides by:
 
@@ -154,7 +154,7 @@ Revenue is nightly price times nights booked, so it seems odd that one of its co
 | Nights booked | **−0.20** |
 | Nightly price | **+0.41** |
 
-**Occupancy and property price move in opposite directions.** Expensive cities are booked *less*, so high occupancy and low property cost tend to arrive together and both push ROI the same way.
+**Occupancy and property price move in opposite directions.** Expensive cities are booked less, so high occupancy and low property cost tend to arrive together and both push ROI the same way.
 
 **Nightly price and property price move together.** Cities that charge more also cost more, so the two effects partly cancel inside ROI.
 
@@ -216,7 +216,14 @@ Nairobi has the cheapest property in the entire sample and still loses money, be
 | Ottawa | 4,368 | 171 | 5.47% |
 | Mexico City | 3,899 | 102 | 3.60% |
 
-Ottawa books more nights than any city in the sample — 171 a year — and returns 5.47%, less than half of Chicago's 11.53% on 144 nights. Clearing the occupancy floor does not guarantee a good return; it only makes one possible.
+Ottawa books more nights than any city in the sample — 171 a year — and still returns only 5.47%, less than half of Chicago's 11.53% on 144 nights. Their property costs are almost identical ($4,368 against $4,094/m²), so the gap is not about price:
+
+```
+Ottawa    171 nights × $106/night = $18,146 a year
+Chicago   144 nights × $225/night = $32,426 a year
+```
+
+Chicago earns 79% more on comparable property because it charges more than twice as much per night. Clearing the occupancy floor does not guarantee a good return; it only makes one possible.
 
 **The floor holds across the full sample, not just the cheap end.** Of all 80 cities, 45 book fewer than 100 nights and none of them returns above 3.5%. The same threshold appears in the outside-centre figures: among the twenty cheapest on that measure, every city below 100 nights returns under 5.6% and every city above returns over 6.6%.
 
@@ -365,8 +372,8 @@ Dropping Switzerland removes the top of the global price range: Zug held the hig
 
 The test is not whether a file is a city in the administrative sense, but whether the Airbnb file and the Numbeo entry describe the same housing market. Numbeo prices metros, not municipal boundaries, so county-level files can be valid matches:
 
-- **Clark County, NV** — kept. Its neighbourhoods are Unincorporated Areas (where the Strip sits), Las Vegas, Henderson, North Las Vegas. That is the Las Vegas metro.
-- **Los Angeles County** — kept. Its neighbourhood list returned Long Beach (1,856 listings), Santa Monica (1,229), Pasadena (805), Beverly Hills (791) and Glendale (722) alongside Hollywood and Venice. Those are separate municipalities, but they form one continuous metropolitan housing market — which is the level Numbeo prices at.
+- **Clark County, NV** — kept. Its neighbourhoods are Unincorporated Areas, Las Vegas, Henderson, North Las Vegas. That is the Las Vegas metro.
+- **Los Angeles County** — kept. Its neighbourhood list returned Long Beach (1,856 listings), Santa Monica (1,229), Pasadena (805), Beverly Hills (791) and Glendale (722) alongside Hollywood and Venice. Those are separate municipalities, but they form one continuous metropolitan housing market. Numbeo is assumed to price at that level; it does not publish its boundary definitions, so this could not be confirmed.
 - **Girona** — dropped. It sounds like a city, but Girona city accounts for only 2.8% of the file's listings. The rest are Costa Brava resort towns: Roses (2,485 listings), Lloret de Mar (1,715), Castelló d'Empúries (1,485), L'Escala (1,318), Tossa de Mar (810). A resort market cannot be priced with an inland provincial capital's property prices.
 
 Two groups of files were checked this way: every file whose name contained a county, region or metro word (`clark-county-nv`, `broward-county`, `santa-clara-county`, `san-mateo-county`, `santa-cruz-county`, `twin-cities-msa`, `greater-manchester`, `los-angeles`), and every file that failed the Numbeo name join, since a failure often meant the file was not a city at all. Each was opened, its neighbourhood list read, and a decision recorded: keep it as a metro, map it to a city name, or drop it as a region.
@@ -442,13 +449,13 @@ Airbnb publishes local currency — Bogotá 179,900, Tokyo 20,700, Paris 212 —
 
 29 currencies come from the ECB. Five are not published by the ECB and were sourced individually:
 
-| Currency | Rate per USD | Source |
-|---|---|---|
-| COP | 3,443.59 | TRM, Superintendencia Financiera |
-| ARS | 1,450.00 | Official rate, BCRA |
-| CLP | 922.34 | Dólar observado, Banco Central de Chile |
-| KES | 129.41 | June 2026 monthly average |
-| TWD | 31.85 | US Federal Reserve H.10 |
+| Currency | Country | Rate per USD | Source |
+|---|---|---|---|
+| COP | Colombia | 3,443.59 | TRM, Superintendencia Financiera |
+| ARS | Argentina | 1,450.00 | Official rate, BCRA |
+| CLP | Chile | 922.34 | Dólar observado, Banco Central de Chile |
+| KES | Kenya | 129.41 | June 2026 monthly average |
+| TWD | Taiwan | 31.85 | US Federal Reserve H.10 |
 
 ---
 
@@ -492,6 +499,8 @@ The 70% ceiling rewrites any individual listing estimated above 255 nights down 
 
 21.5% of active entire-home listings have only 1–2 reviews in twelve months, implying 3 to 12 nights booked all year. They enter the city median with the same weight as a listing booked forty times.
 
+This is why the occupancy figures look low. The highest median in the sample is 46.8% and most cities sit near 30% — well under what a professionally run listing achieves. The median describes the typical listing in a market, and in most markets the typical listing is a spare flat let out a few weekends a year. It is the right number for comparing cities and the wrong one for estimating what a serious operator would book.
+
 ### Validation
 
 Three commercial providers publish occupancy for cities in this sample:
@@ -527,6 +536,7 @@ It is not possible to say whether this estimate is low, the commercial figures a
 | Utilities | Numbeo quote, scaled from 85 m² | Numbeo's convention |
 | Taxes | Excluded | Vary by jurisdiction |
 | Regulation | Not modelled | Varies by city; decisive in several |
+| Market boundaries | Airbnb file and Numbeo entry cover the same housing market | Numbeo does not publish its metro definitions, so this cannot be verified |
 
 ---
 
@@ -540,7 +550,9 @@ Real 1–2 bedroom apartments vary: roughly 23 m² in Hong Kong, 32 m² in Paris
 true ROI = computed ROI × (60 ÷ S_true)
 ```
 
-A US city whose real apartments are 90 m² gets multiplied by 60÷90 = 0.67, so its published figure is **overstated by half**. A Paris flat at 32 m² gets 60÷32 = 1.88, so its figure is **understated by nearly half**. Because the correction differs by country it reshuffles the ranking, favouring large-dwelling countries and penalising dense European and Asian cities.
+Worked through: a US city whose real apartments are 90 m² and whose published figure is 10.0% has a true return of 10.0 × (60÷90) = **6.7%**. A Paris flat at 32 m² with a published 3.0% has a true return of 3.0 × (60÷32) = **5.6%**.
+
+Large apartments mean the published figure is too high; small ones mean it is too low. Because the correction differs by country it reshuffles the ranking, favouring large-dwelling countries and penalising dense European and Asian cities.
 
 **Tested.** The analysis was rerun with 85 m². The revenue term shrinks because its denominator grows, while utilities and maintenance do not move at all — so a different constant does not simply rescale every city by the same amount.
 
