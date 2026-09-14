@@ -534,15 +534,15 @@ It is not possible to say whether this estimate is low, the commercial figures a
 
 ### 1. Fixed apartment size
 
-Real 1–2 bedroom apartments vary: roughly 23 m² in Hong Kong, 32 m² in Paris, 68–102 m² in the US. Since `S` is a chosen constant rather than a measurement, the distortion is exact algebra:
+Real 1–2 bedroom apartments vary: roughly 23 m² in Hong Kong, 32 m² in Paris, 68–102 m² in the US. Since `S` is a chosen constant rather than a measurement, the distortion is exact algebra. To correct any city's figure:
 
 ```
-computed ROI ÷ true ROI = S_true ÷ 60
+true ROI = computed ROI × (60 ÷ S_true)
 ```
 
-A city whose real apartments are 90 m² has its **ROI** overstated by half; one at 32 m² has it understated by nearly half. Because the error differs by country it reshuffles the ranking, favouring large-dwelling countries and penalising dense European and Asian cities.
+A US city whose real apartments are 90 m² gets multiplied by 60÷90 = 0.67, so its published figure is **overstated by half**. A Paris flat at 32 m² gets 60÷32 = 1.88, so its figure is **understated by nearly half**. Because the correction differs by country it reshuffles the ranking, favouring large-dwelling countries and penalising dense European and Asian cities.
 
-**Tested.** The analysis was rerun with 85 m². Revenue scales with size, utilities and maintenance don't, so a different constant does not simply rescale everything.
+**Tested.** The analysis was rerun with 85 m². The revenue term shrinks because its denominator grows, while utilities and maintenance do not move at all — so a different constant does not simply rescale every city by the same amount.
 
 | | Result |
 |---|---|
