@@ -6,20 +6,20 @@ If you bought a 1–2 bedroom apartment and rented it short-term on Airbnb, whic
 
 ## Contents
 
-1. **[Executive summary](#executive-summary)**
-2. **[Findings](#findings)**
-3. **[Method](#method)**
-4. **[City selection](#city-selection)**
-5. **[Cleaning](#cleaning)**
-6. **[Estimating occupancy](#estimating-occupancy)**
-7. **[Assumptions](#assumptions)**
-8. **[Limitations](#limitations)**
-9. **[Extensions](#extensions)**
-10. **[Reproducing this](#reproducing-this)**
+1. [Executive summary](#executive-summary)
+2. [Findings](#findings)
+3. [Method](#method)
+4. [City selection](#city-selection)
+5. [Cleaning](#cleaning)
+6. [Estimating occupancy](#estimating-occupancy)
+7. [Assumptions](#assumptions)
+8. [Limitations](#limitations)
+9. [Extensions](#extensions)
+10. [Reproducing this](#reproducing-this)
 
 ---
 
-## Executive summary
+## <u>Executive summary</u>
 
 Across 80 world cities, **Chicago gives the highest return on a city-centre purchase** — 11.5% gross. Buy outside the centre and the leader changes: **New Orleans returns 22.5%**, against Chicago's 18.0%. **Eight cities return less than nothing** in the centre, and three of them (Oslo, Hong Kong, Munich) lose money wherever in the city you buy.
 
@@ -44,7 +44,7 @@ Every one of these gaps is a data limitation rather than something left out by c
 
 ---
 
-## Findings
+## <u>Findings</u>
 
 | Rank | City | Country | ROI centre | ROI outside | Occupancy | Revenue/yr |
 |---|---|---|---|---|---|---|
@@ -283,7 +283,7 @@ US metros average three times the UK's gap. Spain sits second, well ahead of Can
 
 ---
 
-## Method
+## <u>Method</u>
 
 ```
 revenue     = median nightly price (1-2 bed entire homes, USD) × estimated nights booked
@@ -345,7 +345,7 @@ FROM read_csv_auto('data/detailed/*.csv.gz', filename = true, union_by_name = tr
 
 ---
 
-## City selection
+## <u>City selection</u>
 
 | Filter | Removed | Remaining |
 |---|---|---|
@@ -396,7 +396,7 @@ GROUP BY 1 ORDER BY n DESC LIMIT 15
 
 ---
 
-## Cleaning
+## <u>Cleaning</u>
 
 1. Drop inactive listings (`number_of_reviews_ltm = 0`)
 2. Keep entire homes (`room_type = 'Entire home/apt'`)
@@ -459,7 +459,7 @@ Airbnb publishes local currency — Bogotá 179,900, Tokyo 20,700, Paris 212 —
 
 ---
 
-## Estimating occupancy
+## <u>Estimating occupancy</u>
 
 Airbnb publishes no booking data. This uses the **San Francisco Model**, the method Inside Airbnb applies to its own published figures:
 
@@ -524,7 +524,7 @@ It is not possible to say whether this estimate is low, the commercial figures a
 
 ---
 
-## Assumptions
+## <u>Assumptions</u>
 
 | Assumption | Value | Basis |
 |---|---|---|
@@ -540,7 +540,7 @@ It is not possible to say whether this estimate is low, the commercial figures a
 
 ---
 
-## Limitations
+## <u>Limitations</u>
 
 ### 1. Fixed apartment size
 
@@ -667,7 +667,7 @@ These are the cities Inside Airbnb happens to cover, and any claim about "the be
 
 ---
 
-## Extensions
+## <u>Extensions</u>
 
 - **A regulation layer for the top 20** — legality, night caps, primary-residence rules, registration costs.
 - **Tax rates for the top 20**, lodging and income. At 27.75% on lodging alone, tax is a bigger correction than every cost currently modelled.
@@ -677,7 +677,7 @@ These are the cities Inside Airbnb happens to cover, and any claim about "the be
 
 ---
 
-## Reproducing this
+## <u>Reproducing this</u>
 
 ```bash
 git clone https://github.com/ramsesbenzari/airbnb-roi-analysis
@@ -694,7 +694,7 @@ The Numbeo tables in `data/reference/` were exported by hand from numbeo.com (it
 
 ---
 
-## Repo structure
+## <u>Repo structure</u>
 
 ```
 airbnb-roi-analysis/
