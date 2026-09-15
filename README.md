@@ -688,7 +688,7 @@ python get_links.py        # scrape Inside Airbnb download URLs
 python download.py         # fetch the city files (several GB)
 ```
 
-Then run the notebooks in order: `01_profile_data.ipynb` explores the raw data, `02_clean_data.ipynb` builds the results, `03_charts.ipynb` produces the figures.
+Then run the notebooks in order: `01_profile_data.ipynb` explores the raw data, `02_cleaning_and_analysis.ipynb` builds the results, `03_charts.ipynb` produces the figures.
 
 The Numbeo tables in `data/reference/` were exported by hand from numbeo.com (itemId 100, 101 and 30, in USD) and committed, since Numbeo has no export API. Exchange rates are pinned to 2026-06-30.
 
@@ -717,6 +717,6 @@ airbnb-roi-analysis/
 │       └── exchange_rates.csv      35 rates pinned to 2026-06-30
 └── notebooks/
     ├── 01_profile_data.ipynb
-    ├── 02_clean_data.ipynb
+    ├── 02_cleaning_and_analysis.ipynb
     └── 03_charts.ipynb
 ```

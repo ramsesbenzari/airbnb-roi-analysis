@@ -11,7 +11,7 @@ For each city: if you bought a 1–2 bedroom apartment and let it short-term on 
 Four things follow from that phrasing:
 
 - **Buying, not letting what you already own.** Property cost sits in the denominator. This is why revenue-ranked market reports answer a different question — useful to an existing owner, misleading to a buyer.
-- **1–2 bedrooms.** A size the cost side can price consistently. Enforcing it is what made a second download necessary, since the summary files carry no bedroom count.
+- **1–2 bedrooms.** A size the cost side can price consistently. Inside Airbnb publishes two files per city: a summary file of 16 columns with no bedroom count, and a detailed file of 75 columns that includes one. The first pass used the summary files; enforcing the bedroom filter meant downloading the detailed set for every surviving city.
 - **Entire homes.** Private rooms are a different product with different economics.
 - **Annual.** Occupancy covers twelve months, not a peak season.
 
@@ -68,7 +68,18 @@ Three things fall out of the algebra, each worth knowing before reading the resu
 
 The README reports correlations between each input and ROI. Two notes on reading them.
 
-**A weak correlation is not the same as an unimportant variable.** Property price scores −0.36, which understates its role. For any single city it is decisive — halve the purchase price and the return doubles. What weakens it as a *predictor across cities* is that a high price signals two opposite things at once: the flat costs more to buy, but the city also charges more per night. Those pull the return in opposite directions, so price alone is a poor guide to a city's return.
+**A weak correlation is not the same as an unimportant variable.** Property price scores −0.36, which understates its role. For any single city it is decisive: halve the purchase price and the return doubles.
+
+The weakness shows up only when comparing cities, which is the only thing a correlation can measure — a single city gives one price and one return, with nothing to correlate. Every correlation in this project is therefore a statement about the 80 cities compared against each other, never about what happens inside one of them.
+
+And when comparing cities, a high property price signals two opposite things at once:
+
+| What a high price tells you | Effect on return |
+|---|---|
+| The flat costs more to buy | lower |
+| The city is expensive generally, so nightly rates are higher | higher |
+
+The two partly cancel, so knowing a city's property price leaves you little wiser about its return. That is a statement about price as a clue, not about price as a cause.
 
 **Occupancy scores highest because it has no such conflict.** It correlates −0.20 with property price, so busy cities tend also to be cheap ones. High occupancy and low cost arrive together and both raise the return.
 
@@ -81,7 +92,7 @@ Every input is free and public. The pipeline runs end to end from a clone:
 1. `get_links.py` — scrapes Inside Airbnb download URLs
 2. `download.py` — fetches the city files
 3. `01_profile_data.ipynb` — profiles the raw data
-4. `02_clean_data.ipynb` — builds the `cities` and `city_metrics` tables, exports `results.csv`
+4. `02_cleaning_and_analysis.ipynb` — builds the `cities` and `city_metrics` tables, exports `results.csv`
 5. `03_charts.ipynb` — produces the figures
 
 The three Numbeo tables were exported by hand and committed, since Numbeo has no export API. Exchange rates are pinned to 2026-06-30 so results do not drift with currency movements.
@@ -96,5 +107,7 @@ Recorded so the scope is explicit rather than implied:
 - **Tax rates** for the top 20, lodging and income.
 - **City-level apartment sizes**, should a consistent cross-country source appear.
 - **A comparison against long-term letting**, using Numbeo's gross rental yield column.
-- **Markets Inside Airbnb does not cover** — Morocco, Egypt, India, Indonesia and most of Latin America — scraped directly and run through the same pipeline rather than imported from a source with different methodology.
+- **Markets Inside Airbnb does not cover**, scraped directly and run through the same pipeline rather than imported from a source with different methodology. Countries like Morocco, Egypt, India and Indonesia have no coverage at all.
+
+  Coverage is also uneven within the countries that do appear. The United States contributes 21 cities; Japan, Turkey, Mexico, Hungary and a dozen others contribute one each. France has three. That imbalance is not a judgement about which markets matter — it reflects where Inside Airbnb has volunteers. The 80 cities are the ones that happen to be maintained, not a designed sample, and no country in the set has all of its significant markets represented.
 - **Modelling.** Nightly price prediction, occupancy drivers and city clustering were scoped but not built. They are a separate project using this dataset as input.
