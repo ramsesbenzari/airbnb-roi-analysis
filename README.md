@@ -38,6 +38,7 @@ This is a screening exercise, not investment advice, and four things constrain i
 - **Occupancy is estimated, not measured.** Airbnb publishes no booking data. This uses the San Francisco Model, the method Inside Airbnb applies to its own figures.
 - **These are not "the world's 80 cities."** Inside Airbnb's coverage is volunteer-maintained. North America, Western Europe and Australia are well covered; Africa, South Asia and the Middle East barely at all.
 
+- **The North American clustering is partly an artefact, not a finding.** Two separate limitations push the same way. Inside Airbnb's coverage is volunteer-maintained, so the 123 starting cities over-represent North America, Western Europe and Australia and cover almost nothing in Asia, Africa or the Middle East. And the fixed 60 m² assumption favours countries where apartments are large — the US and Canada — while penalising dense cities like Hong Kong and Paris. Both biases point in the same direction, so a map of these results shows where the data is as much as where the returns are.
 - **Property cost assumes a fixed 60 m² apartment everywhere.** Changing the constant to another single number barely reorders the table. But real apartment sizes differ by country — roughly 23 m² in Hong Kong against 68–102 m² in the US — and correcting for that would reshuffle the ranking substantially, favouring dense cities and penalising sprawling ones. No source exists to make that correction.
 
 Every one of these gaps is a data limitation rather than something left out by choice. There is no public source for 1–2 bedroom apartment size across 32 countries, no occupancy source that publishes both its denominator and its time window, and no consolidated source for short-term rental regulation or tax by city. Filling them would mean either commercial licences bought country by country, or manual research on a scale that would dwarf the analysis itself. What is here is what free, reproducible data supports.
@@ -64,6 +65,10 @@ Every one of these gaps is a data limitation rather than something left out by c
 All 80 cities: [`data/reference/results.csv`](data/reference/results.csv)
 
 *These are screening figures. See [Limitations](#limitations) for what they exclude.*
+
+![Top 20 cities by return](charts/map_top20.png)
+
+**Read this map carefully.** Every one of the top twenty sits in North America or Western Europe. That is partly the finding and partly the data: Inside Airbnb covers two African cities and nothing in South Asia or the Middle East, and the fixed 60 m² assumption favours countries where apartments are large. The absence of a region here means it was not measured, not that it offers nothing.
 
 **Ranked by the outside-centre figure the order changes**: New Orleans 22.5%, Columbus 19.8%, Fort Worth 19.5%, Chicago 18.0%. Chicago leads on a central purchase; three US cities beat it in the suburbs.
 
@@ -251,6 +256,8 @@ Negative means the property does not cover its own holding costs.
 These cities are not suffering from two separate problems. Expensive property and thin occupancy arrive together — that is the −0.20 correlation above, at its extreme. London books 42 nights a year against a legal cap of 90; Hong Kong pairs 15.3% occupancy with $28,217/m² property; Oslo and Munich sit near the top of the price range and the bottom of the occupancy range. Regulation explains part of it, and the rest is that expensive cities tend to have more hotel supply and stricter enforcement.
 
 **Only three lose money wherever you buy.** Oslo, Hong Kong and Munich stay negative outside the centre. The other five turn positive outside it — but only just, at 0.17% to 1.22%, so the difference is between losing a little and earning almost nothing rather than between a bad market and a good one.
+
+![The eight cities returning less than nothing](charts/map_negative.png)
 
 All of these figures are before tax, so the real picture in each is worse.
 

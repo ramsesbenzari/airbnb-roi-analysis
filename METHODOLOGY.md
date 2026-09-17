@@ -93,7 +93,9 @@ Every input is free and public. The pipeline runs end to end from a clone:
 2. `download.py` — fetches the city files
 3. `01_profile_data.ipynb` — profiles the raw data
 4. `02_cleaning_and_analysis.ipynb` — builds the `cities` and `city_metrics` tables, exports `results.csv`
-5. `03_charts.ipynb` — produces the figures
+5. `03_charts.ipynb` — produces the figures, including maps drawn with GeoPandas against Natural Earth country outlines
+
+City coordinates for the maps are the median latitude and longitude of each city's listings, taken from the Inside Airbnb files rather than a separate geocoding source. All maps share one colour scale fixed at −1% to 12%, so a given colour means the same return on each of them.
 
 The three Numbeo tables were exported by hand and committed, since Numbeo has no export API. Exchange rates are pinned to 2026-06-30 so results do not drift with currency movements.
 
