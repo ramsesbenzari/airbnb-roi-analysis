@@ -1,4 +1,4 @@
-# Short-Term Rental Property Investment: 80 Cities Ranked by ROI
+# Global Airbnb Investment ROI Analysis
 
 If you bought a 1–2 bedroom apartment and rented it short-term on Airbnb, which cities would give the best return?
 
